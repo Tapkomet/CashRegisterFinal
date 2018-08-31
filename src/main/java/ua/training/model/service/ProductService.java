@@ -13,7 +13,12 @@ public class ProductService {
 
     public List<Product> getAllProducts(){
         try (ProductDao productDao = daoFactory.createProductDao()) {
-            return productDao.findAll();
+            try {
+                return productDao.findAll();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 

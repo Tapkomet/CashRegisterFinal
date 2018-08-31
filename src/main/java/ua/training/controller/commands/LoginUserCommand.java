@@ -26,9 +26,12 @@ public class LoginUserCommand implements Command {
         if( email == null || email.equals("") || pass == null || pass.equals("")  ){
             return "/login.jsp";
         }
+        if(CommandUtility.checkUserIsLogged(request, email)){
+            return "/WEB-INF/error.jsp";
+        }
         Optional<User> user = userService.login(email);
         if( user.isPresent() && user.get().getPassword().equals(pass)){
-            request.getSession().setAttribute("user" , user.get());
+            CommandUtility.setUser(request, user.get());
             logger.info("User "+ email+" logged successfully.");
             return "/api/manager/products";
 

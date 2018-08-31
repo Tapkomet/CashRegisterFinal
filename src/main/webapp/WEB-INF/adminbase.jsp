@@ -27,15 +27,6 @@ String getFormattedDate(){
         <a href="${pageContext.request.contextPath}/api/logout">Logout</a>
         <br>
         <a href="${pageContext.request.contextPath}/api/manager/products">ProductList</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/exception">Exception</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/registration.jsp">Registration</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/admin">Admin</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/manager">Product Manager</a>
-        <br>
 
     </body>
 </html>
