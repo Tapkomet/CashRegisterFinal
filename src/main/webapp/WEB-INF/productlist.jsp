@@ -22,12 +22,13 @@
         <br>
         <%=request.getAttribute("products")%>
         <br>
-        <form action="${pageContext.request.contextPath}/api/manager/addProduct'/>" method="post">
+        <form action="${pageContext.request.contextPath}/api/manager/addProduct" method="post">
              Code <input type="number" name="code"/><br>
              Name <input type="text" name="name"/><br>
              Sold by Weight <input type="checkbox" name="soldByWeight"/><br>
              Number in stock <input type="number" name="number"/><br>
              Total weight in stock <input type="number" name="weight"/><br>
+             Price per unit or kilo <input type="number" name="price"/><br>
              <input type="submit"/>
         </form>
 

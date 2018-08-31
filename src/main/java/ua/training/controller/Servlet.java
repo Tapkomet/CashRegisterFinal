@@ -1,5 +1,7 @@
 package ua.training.controller;
 
+import ua.training.controller.commands.AddProductCommand;
+import ua.training.controller.commands.ProductListCommand;
 import ua.training.controller.commands.*;
 import ua.training.model.service.ProductService;
 import ua.training.model.service.UserService;
@@ -20,7 +22,7 @@ public class Servlet extends HttpServlet {
     public void init(){
         commands.put("manager/products",
                 new ProductListCommand(new ProductService()));
-        commands.put("manager/addproduct",
+        commands.put("manager/addProduct",
                 new AddProductCommand(new ProductService()));
         commands.put("user-login",
                 new LoginUserCommand(new UserService()));

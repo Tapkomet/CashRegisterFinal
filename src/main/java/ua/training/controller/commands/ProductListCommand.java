@@ -6,7 +6,7 @@ import ua.training.model.service.ProductService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class ProductListCommand implements Command {
+public class ProductListCommand implements ua.training.controller.commands.Command {
     private ProductService productService;
 
     public ProductListCommand(ProductService productService) {

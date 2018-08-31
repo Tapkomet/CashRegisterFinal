@@ -30,7 +30,7 @@ public class LoginUserCommand implements Command {
         if( user.isPresent() && user.get().getPassword().equals(pass)){
             request.getSession().setAttribute("user" , user.get());
             logger.info("User "+ email+" logged successfully.");
-            return "/WEB-INF/productlist.jsp";
+            return "/api/manager/products";
 
         }
         logger.info("Invalid attempt of login user:'"+ email+"'");

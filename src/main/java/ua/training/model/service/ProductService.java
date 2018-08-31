@@ -17,9 +17,9 @@ public class ProductService {
         }
     }
 
-    public void addProduct(int code, String name, boolean isSoldByWeight, int number, long weight) {
+    public void addProduct(int code, String name, boolean isSoldByWeight, int number, long weight, long price) {
         try (ProductDao productDao = daoFactory.createProductDao()) {
-            productDao.addProduct(code, name, isSoldByWeight, number, weight);
+            productDao.addProduct(code, name, isSoldByWeight, number, weight, price);
         } catch (SQLException e) {
             e.printStackTrace();
         }

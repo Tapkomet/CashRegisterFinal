@@ -8,7 +8,20 @@ public class Product {
     private String name;
     private long price;
     private boolean soldByWeight;
-    private int checkId;
+    private Check check;
     private int number;
     private long weight;
+    private User user;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + code +
+                ", name='" + name +
+                ", price=" + price +
+                ", soldByWeight=" + soldByWeight +
+                ", number=" + number +
+                ", weight=" + weight +
+                '}';
+    }
 }
