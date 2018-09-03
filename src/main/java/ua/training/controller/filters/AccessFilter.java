@@ -4,6 +4,7 @@ import ua.training.model.entity.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AccessFilter implements Filter {
@@ -17,6 +18,8 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         User user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String loginURI = request.getContextPath() + "/login.jsp";
         String path = request.getRequestURI();
         String roleRequired = "";
         if (path.contains("manager")) roleRequired = "manager";
@@ -26,25 +29,23 @@ public class AccessFilter implements Filter {
             case "manager":
                 if (user!=null&&(user.getRole() == User.ROLE.PRODUCT_MANAGER || user.getRole() == User.ROLE.SENIOR_CASHIER)) {
                     filterChain.doFilter(servletRequest, servletResponse);
+
                 } else {
-                    servletResponse.getWriter().append("AccessDenied");
-                    return;
+                    response.sendRedirect(loginURI);
                 }
                 break;
             case "admin":
                 if (user!=null&&(user.getRole() == User.ROLE.PRODUCT_MANAGER || user.getRole() == User.ROLE.SENIOR_CASHIER)) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
-                    servletResponse.getWriter().append("AccessDenied");
-                    return;
+                    response.sendRedirect(loginURI);
                 }
                 break;
             case "cashier":
                 if (user!=null&&(user.getRole() == User.ROLE.CASHIER || user.getRole() == User.ROLE.SENIOR_CASHIER)) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
-                    servletResponse.getWriter().append("AccessDenied");
-                    return;
+                    response.sendRedirect(loginURI);
                 }
                 break;
             default:

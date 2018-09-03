@@ -5,7 +5,10 @@ import org.apache.logging.log4j.Logger;
 import ua.training.model.entity.User;
 import ua.training.model.service.UserService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Optional;
 
 
@@ -19,15 +22,16 @@ public class RegisterUserCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         if( email == null || email.equals("") || pass == null || pass.equals("")  ){
-            return "/index.jsp";
+            forward(request, response, "/index.jsp");
+            return;
         }
         userService.register(surname, email, pass);
         logger.info("Registration attempt");
-        return "/index.jsp";
+        forward(request, response, "/index.jsp");
     }
 }

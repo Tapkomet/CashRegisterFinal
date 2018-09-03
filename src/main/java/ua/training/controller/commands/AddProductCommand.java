@@ -4,7 +4,10 @@ import ua.training.model.entity.Product;
 import ua.training.model.entity.User;
 import ua.training.model.service.ProductService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 public class AddProductCommand implements ua.training.controller.commands.Command {
@@ -15,7 +18,7 @@ public class AddProductCommand implements ua.training.controller.commands.Comman
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int code = Integer.parseInt(request.getParameter("code"));
         String name = request.getParameter("name");
         boolean isSoldByWeight = ("on".equals(request.getParameter("soldByWeight")));
@@ -35,6 +38,6 @@ public class AddProductCommand implements ua.training.controller.commands.Comman
         productService.create(product);
         List<Product> products = productService.getAllProducts();
         request.setAttribute("products" , products);
-        return "/WEB-INF/productlist.jsp";
+        forward(request, response, "/WEB-INF/productlist.jsp");
     }
 }

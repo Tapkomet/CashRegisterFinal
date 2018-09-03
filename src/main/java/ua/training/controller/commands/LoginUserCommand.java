@@ -5,7 +5,10 @@ import org.apache.logging.log4j.Logger;
 import ua.training.model.entity.User;
 import ua.training.model.service.UserService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Optional;
 
 
@@ -20,31 +23,39 @@ public class LoginUserCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         if( email == null || email.equals("") || pass == null || pass.equals("")  ){
-            return "/login.jsp";
+            forward(request, response, "/login.jsp");
+            return;
         }
         if(CommandUtility.checkUserIsLogged(request, email)){
-            return "/WEB-INF/error.jsp";
+            forward(request, response, "/WEB-INF/error.jsp");
+            return;
         }
         Optional<User> user = userService.login(email);
         if( user.isPresent() && user.get().getPassword().equals(pass)){
             CommandUtility.setUser(request, user.get());
             logger.info("User "+ email+" logged successfully.");
             if(user.get().getRole()==User.ROLE.SENIOR_CASHIER){
-                return "/api/admin";
+                response.sendRedirect(request.getContextPath() + "/api/admin");
+                return;
+
             }
             if(user.get().getRole()==User.ROLE.PRODUCT_MANAGER){
-                return "/api/manager";
+                response.sendRedirect(request.getContextPath() + "/api/manager");
+                return;
             }
             if(user.get().getRole()==User.ROLE.CASHIER){
-                return "/api/cashier";
+                response.sendRedirect(request.getContextPath() + "/api/cashier");
+                return;
             }
-            return "/WEB-INF/error.jsp";
+            forward(request, response, "/WEB-INF/error.jsp");
+            return;
         }
         logger.info("Invalid attempt of login user:'"+ email+"'");
-        return "/login.jsp";
+        forward(request, response, "/login.jsp");
+        return;
     }
 }

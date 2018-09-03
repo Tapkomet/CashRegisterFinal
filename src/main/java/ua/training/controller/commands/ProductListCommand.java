@@ -3,7 +3,10 @@ package ua.training.controller.commands;
 import ua.training.model.entity.Product;
 import ua.training.model.service.ProductService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 public class ProductListCommand implements ua.training.controller.commands.Command {
@@ -14,9 +17,9 @@ public class ProductListCommand implements ua.training.controller.commands.Comma
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products = productService.getAllProducts();
         request.setAttribute("products" , products);
-        return "/WEB-INF/productlist.jsp";
+        forward(request, response, "/WEB-INF/productlist.jsp");
     }
 }

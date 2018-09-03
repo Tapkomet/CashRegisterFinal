@@ -1,10 +1,13 @@
 package ua.training.controller.commands;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class CashierCommand implements Command {
     @Override
-    public String execute(HttpServletRequest request) {
-        return "/WEB-INF/cashierbase.jsp";
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        forward(request, response, "/WEB-INF/cashierbase.jsp");
     }
 }

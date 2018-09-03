@@ -13,7 +13,7 @@ public class User {
     private ROLE role;
 
     public enum ROLE {
-        CASHIER, SENIOR_CASHIER, USER_ROLE, UNKNOWN
+        CASHIER, SENIOR_CASHIER, PRODUCT_MANAGER, UNKNOWN
     }
 
     public User() {
