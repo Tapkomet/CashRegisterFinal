@@ -33,8 +33,16 @@ public class LoginUserCommand implements Command {
         if( user.isPresent() && user.get().getPassword().equals(pass)){
             CommandUtility.setUser(request, user.get());
             logger.info("User "+ email+" logged successfully.");
-            return "/api/manager/products";
-
+            if(user.get().getRole()==User.ROLE.SENIOR_CASHIER){
+                return "/api/admin";
+            }
+            if(user.get().getRole()==User.ROLE.PRODUCT_MANAGER){
+                return "/api/manager";
+            }
+            if(user.get().getRole()==User.ROLE.CASHIER){
+                return "/api/cashier";
+            }
+            return "/WEB-INF/error.jsp";
         }
         logger.info("Invalid attempt of login user:'"+ email+"'");
         return "/login.jsp";

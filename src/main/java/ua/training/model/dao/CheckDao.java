@@ -1,8 +1,8 @@
 package ua.training.model.dao;
 
-import ua.training.model.entity.Product;
+import ua.training.model.entity.Check;
 
 import java.sql.SQLException;
 
-public interface CheckDao extends GenericDao<Product> {
+public interface CheckDao extends GenericDao<Check> {
 }

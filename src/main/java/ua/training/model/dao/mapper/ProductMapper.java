@@ -15,6 +15,9 @@ public class ProductMapper implements ObjectMapper<Product> {
         product.setCode(rs.getInt("code"));
         product.setName(rs.getString("name"));
         product.setPrice(rs.getLong("price"));
+        product.setSoldByWeight(rs.getBoolean("is_sold_by_weight"));
+        product.setNumber(rs.getInt("number_in_stock"));
+        product.setWeight(rs.getLong("weight_in_stock"));
         return product;
     }
 

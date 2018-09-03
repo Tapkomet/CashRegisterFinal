@@ -29,4 +29,12 @@ public class ProductService {
             e.printStackTrace();
         }
     }
+
+    public void create(Product product){
+        try (ProductDao productDao = daoFactory.createProductDao()) {
+            productDao.create(product);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

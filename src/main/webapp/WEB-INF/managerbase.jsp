@@ -13,11 +13,11 @@ String getFormattedDate(){
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Admin Page</title>
+    <title>Manager Page</title>
 </head>
     <body>
         <h2>
-            Hello Admin! <br/>
+            Hello Manager! <br/>
             <i>Сегодня <%= getFormattedDate() %></i>
         </h2>
 
@@ -25,10 +25,6 @@ String getFormattedDate(){
         <a href="${pageContext.request.contextPath}/api/logout">Logout</a>
         <br>
         <a href="${pageContext.request.contextPath}/api/manager/products">ProductList</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/cashier">View as Cashier</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/manager">View as Manager</a>
 
     </body>
 </html>

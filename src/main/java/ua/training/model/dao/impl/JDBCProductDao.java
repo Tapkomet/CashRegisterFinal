@@ -28,15 +28,18 @@ public class JDBCProductDao implements ProductDao {
         int number = product.getNumber();
         long weight = product.getWeight();
         long price = product.getPrice();
+        int managerId = product.getManager().getId();
         PreparedStatement stmt = connection.prepareStatement(
-                "insert into product (code, name, is_sold_by_weight, number_in_stock, weight_in_stock, price)" +
-                        " values (?, ?, ?, ?, ?, ?)");
+                "insert into product (code, name, is_sold_by_weight, number_in_stock," +
+                        " weight_in_stock, price, product_manager_id)" +
+                        " values (?, ?, ?, ?, ?, ?, ?)");
         stmt.setInt(1, code);
         stmt.setString(2, name);
         stmt.setBoolean(3, isSoldByWeight);
         stmt.setInt(4, number);
         stmt.setLong(5, weight);
         stmt.setLong(6, price);
+        stmt.setInt(7, managerId);
         stmt.executeUpdate();
 
         stmt.close();

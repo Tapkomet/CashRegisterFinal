@@ -1,5 +1,6 @@
 package ua.training.model.dao.impl;
 
+import ua.training.model.dao.CheckDao;
 import ua.training.model.dao.DaoFactory;
 import ua.training.model.dao.ProductDao;
 import ua.training.model.dao.UserDao;
@@ -17,12 +18,14 @@ public class JDBCDaoFactory extends DaoFactory {
     public UserDao createUserDao() {
         return new JDBCUserDao(getConnection());
     }
-    @Override
-    public ProductDao createProductDao() {
-        return new JDBCProductDao(getConnection());
-    }
 
-    private Connection getConnection(){
+    @Override
+    public ProductDao createProductDao() { return new JDBCProductDao(getConnection()); }
+
+    @Override
+    public CheckDao createCheckDao() { return new JDBCCheckDao(getConnection()); }
+
+    private Connection getConnection() {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {

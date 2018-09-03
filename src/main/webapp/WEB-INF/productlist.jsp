@@ -6,21 +6,20 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Car List</title>
+    <title>Product List</title>
 </head>
     <body>
         <h2>
             List Products <br/>
         </h2>
         <table>
-        <tr><th>Name</th><th>Group</th></tr>
+        <tr><th>Code</th><th>Name</th><th>Price</th><th>IsSoldByWeight</th><th>Total number</th><th>Total weight</th></tr>
         <c:forEach var="i" items="${products}">
-            <tr><td>${i.code}<c:out value="${i.name}"/></td><td>${i.price}</td>
+            <tr><td>${i.code}</td><td>${i.name}</td><td>${i.price}</td>
+            <td>${i.soldByWeight}</td><td>${i.number}</td><td>${i.weight}</td>
         </c:forEach>
         </table>
         <br>
-        <br>
-        <%=request.getAttribute("products")%>
         <br>
         <form action="${pageContext.request.contextPath}/api/manager/addProduct" method="post">
              Code <input type="number" name="code"/><br>

@@ -3,6 +3,7 @@ package ua.training.controller;
 import ua.training.controller.commands.AddProductCommand;
 import ua.training.controller.commands.ProductListCommand;
 import ua.training.controller.commands.*;
+import ua.training.model.service.CheckService;
 import ua.training.model.service.ProductService;
 import ua.training.model.service.UserService;
 
@@ -36,6 +37,11 @@ public class Servlet extends HttpServlet {
         commands.put("user-register",
                 new RegisterUserCommand(new UserService()));
         commands.put("exception" , new ExceptionCommand());
+        commands.put("cashier/checks",
+                new CheckListCommand(new CheckService()));
+        commands.put("manager" , new ManagerCommand());
+        commands.put("admin" , new AdminCommand());
+        commands.put("cashier" , new CashierCommand());
     }
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
