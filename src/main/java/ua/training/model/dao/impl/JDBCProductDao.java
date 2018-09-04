@@ -85,8 +85,29 @@ public class JDBCProductDao implements ProductDao {
 
 
     @Override
-    public void update(Product product) {
+    public void update(Product product) throws SQLException {
+        int code = product.getCode();
+        //String name = product.getName();
+        //boolean isSoldByWeight = product.isSoldByWeight();
+        int number = product.getNumber();
+        long weight = product.getWeight();
+        long price = product.getPrice();
+        int managerId = product.getManager().getId();
+        PreparedStatement stmt = connection.prepareStatement(
+                "update product set number_in_stock = ?," +
+                        " weight_in_stock = ?, price = ?, product_manager_id = ?" +
+                        " where code = ?");
+        stmt.setInt(5, code);
+        //stmt.setString(2, name);
+        //stmt.setBoolean(3, isSoldByWeight);
+        stmt.setInt(1, number);
+        stmt.setLong(2, weight);
+        stmt.setLong(3, price);
+        stmt.setInt(4, managerId);
+        stmt.executeUpdate();
 
+        stmt.close();
+        connection.close();
     }
 
     @Override
@@ -94,7 +115,7 @@ public class JDBCProductDao implements ProductDao {
         PreparedStatement stmt = connection.prepareStatement(
                 "delete from product where code = (?)");
         stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
+        stmt.executeUpdate();
 
         stmt.close();
         connection.close();

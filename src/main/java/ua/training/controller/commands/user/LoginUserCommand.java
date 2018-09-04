@@ -1,7 +1,8 @@
-package ua.training.controller.commands;
+package ua.training.controller.commands.user;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.training.controller.commands.Command;
 import ua.training.model.entity.User;
 import ua.training.model.service.UserService;
 

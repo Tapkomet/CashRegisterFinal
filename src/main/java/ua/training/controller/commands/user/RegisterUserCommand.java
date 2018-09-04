@@ -1,15 +1,14 @@
-package ua.training.controller.commands;
+package ua.training.controller.commands.user;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.model.entity.User;
+import ua.training.controller.commands.Command;
 import ua.training.model.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 
 public class RegisterUserCommand implements Command {

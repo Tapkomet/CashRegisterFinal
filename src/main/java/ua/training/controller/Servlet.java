@@ -1,8 +1,10 @@
 package ua.training.controller;
 
-import ua.training.controller.commands.AddProductCommand;
-import ua.training.controller.commands.ProductListCommand;
 import ua.training.controller.commands.*;
+import ua.training.controller.commands.product.*;
+import ua.training.controller.commands.user.LoginUserCommand;
+import ua.training.controller.commands.user.LogoutUserCommand;
+import ua.training.controller.commands.user.RegisterUserCommand;
 import ua.training.model.service.CheckService;
 import ua.training.model.service.ProductService;
 import ua.training.model.service.UserService;
@@ -26,10 +28,16 @@ public class Servlet extends HttpServlet {
         super.init(servletConfig);
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
+        commands.put("manager/product",
+                new ProductCommand(new ProductService()));
         commands.put("manager/products",
                 new ProductListCommand(new ProductService()));
         commands.put("manager/addProduct",
                 new AddProductCommand(new ProductService()));
+        commands.put("manager/editProduct",
+                new EditProductCommand(new ProductService()));
+        commands.put("manager/deleteProduct",
+                new DeleteProductCommand(new ProductService()));
         commands.put("user-login",
                 new LoginUserCommand(new UserService()));
         commands.put("logout",

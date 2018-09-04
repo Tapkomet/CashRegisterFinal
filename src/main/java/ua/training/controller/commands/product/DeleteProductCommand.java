@@ -1,25 +1,26 @@
-package ua.training.controller.commands;
+package ua.training.controller.commands.product;
 
 import ua.training.model.entity.Product;
+import ua.training.model.entity.User;
 import ua.training.model.service.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-public class ProductListCommand implements ua.training.controller.commands.Command {
+public class DeleteProductCommand implements ua.training.controller.commands.Command {
     private ProductService productService;
 
-    public ProductListCommand(ProductService productService) {
+    public DeleteProductCommand(ProductService productService) {
         this.productService = productService;
     }
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> products = productService.getAllProducts();
-        request.setAttribute("products" , products);
-        forward(request, response, "/WEB-INF/productlist.jsp");
+        String sid = request.getParameter("id");
+        int code = Integer.parseInt(sid);
+        productService.delete(code);
+        response.sendRedirect(request.getContextPath() + "/api/manager/products");
     }
 }

@@ -22,6 +22,15 @@ public class ProductService {
         }
     }
 
+    public Product getProductById(int id){
+        try (ProductDao dao = daoFactory.createProductDao()) {
+            return dao.findById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void addProduct(int code, String name, boolean isSoldByWeight, int number, long weight, long price) {
         try (ProductDao productDao = daoFactory.createProductDao()) {
             productDao.addProduct(code, name, isSoldByWeight, number, weight, price);
@@ -33,6 +42,22 @@ public class ProductService {
     public void create(Product product){
         try (ProductDao productDao = daoFactory.createProductDao()) {
             productDao.create(product);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Product product){
+        try (ProductDao productDao = daoFactory.createProductDao()) {
+            productDao.update(product);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int code){
+        try (ProductDao productDao = daoFactory.createProductDao()) {
+            productDao.delete(code);
         } catch (SQLException e) {
             e.printStackTrace();
         }

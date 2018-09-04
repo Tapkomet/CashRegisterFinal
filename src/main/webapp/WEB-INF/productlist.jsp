@@ -13,10 +13,18 @@
             List Products <br/>
         </h2>
         <table>
-        <tr><th>Code</th><th>Name</th><th>Price</th><th>IsSoldByWeight</th><th>Total number</th><th>Total weight</th></tr>
+        <tr><th>Code</th><th>Name</th><th>Price</th><th>IsSoldByWeight</th>
+        <th>Total number</th><th>Total weight</th><th>User</th><th></th></tr>
         <c:forEach var="i" items="${products}">
-            <tr><td>${i.code}</td><td>${i.name}</td><td>${i.price}</td>
-            <td>${i.soldByWeight}</td><td>${i.number}</td><td>${i.weight}</td>
+            <tr><td><a href="product?id=<c:out value='${i.code}' />"> <c:out value="${i.code}"/></a></td>
+            <td>${i.name}</td><td>${i.price}</td>
+            <td>${i.soldByWeight}</td><td>${i.number}</td><td>${i.weight}</td><td>${i.manager.id}</td>
+            <td>
+            <form action="${pageContext.request.contextPath}/api/manager/deleteProduct?id=${i.code}"
+             method="post">
+            <input type="submit" value="Delete"/>
+            </form>
+            </td>
         </c:forEach>
         </table>
         <br>

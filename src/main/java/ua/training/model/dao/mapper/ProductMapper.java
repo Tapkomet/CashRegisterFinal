@@ -1,6 +1,7 @@
 package ua.training.model.dao.mapper;
 
 import ua.training.model.entity.Product;
+import ua.training.model.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,9 @@ public class ProductMapper implements ObjectMapper<Product> {
         product.setSoldByWeight(rs.getBoolean("is_sold_by_weight"));
         product.setNumber(rs.getInt("number_in_stock"));
         product.setWeight(rs.getLong("weight_in_stock"));
+        User manager = new User();
+        manager.setId(rs.getInt("product_manager_id"));
+        product.setManager(manager);
         return product;
     }
 

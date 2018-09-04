@@ -1,4 +1,4 @@
-package ua.training.controller.commands;
+package ua.training.controller.commands.product;
 
 import ua.training.model.entity.Product;
 import ua.training.model.entity.User;
@@ -21,23 +21,23 @@ public class AddProductCommand implements ua.training.controller.commands.Comman
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int code = Integer.parseInt(request.getParameter("code"));
         String name = request.getParameter("name");
-        boolean isSoldByWeight = ("on".equals(request.getParameter("soldByWeight")));
-        System.out.println(isSoldByWeight);
-        int number = Integer.parseInt(request.getParameter("number"));
-        long weight = Long.parseLong(request.getParameter("weight"));
+        boolean isSoldByWeight = !(request.getParameter("soldByWeight")==null);
         long price = Long.parseLong(request.getParameter("price"));
         User user = (User) ((HttpServletRequest) request).getSession().getAttribute("user");
         Product product = new Product.Builder(code)
                 .productName(name)
                 .isSoldByWeight(isSoldByWeight)
-                .number(number)
-                .weight(weight)
                 .price(price)
                 .byManager(user)
                 .build();
+        if (isSoldByWeight) {
+            long weight = Long.parseLong(request.getParameter("weight"));
+            product.setWeight(weight);
+        } else {
+            int number = Integer.parseInt(request.getParameter("number"));
+            product.setNumber(number);
+        }
         productService.create(product);
-        List<Product> products = productService.getAllProducts();
-        request.setAttribute("products" , products);
-        forward(request, response, "/WEB-INF/productlist.jsp");
+        response.sendRedirect(request.getContextPath() + "/api/manager/products");
     }
 }
