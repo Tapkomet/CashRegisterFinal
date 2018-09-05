@@ -5,29 +5,22 @@ import ua.training.model.dao.ProductDao;
 import ua.training.model.entity.Product;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductService {
 
     DaoFactory daoFactory = DaoFactory.getInstance();
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() throws SQLException {
         try (ProductDao productDao = daoFactory.createProductDao()) {
-            try {
                 return productDao.findAll();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return null;
-            }
         }
     }
 
-    public Product getProductById(int id){
+    public Product getProductById(int id) throws SQLException {
         try (ProductDao dao = daoFactory.createProductDao()) {
             return dao.findById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
         }
     }
 
@@ -39,27 +32,41 @@ public class ProductService {
         }
     }
 
-    public void create(Product product){
+    public void create(Product product) throws SQLException {
         try (ProductDao productDao = daoFactory.createProductDao()) {
             productDao.create(product);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
-    public void update(Product product){
+    public void update(Product product) throws SQLException {
         try (ProductDao productDao = daoFactory.createProductDao()) {
             productDao.update(product);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
-    public void delete(int code){
+    public void delete(int code) throws SQLException {
         try (ProductDao productDao = daoFactory.createProductDao()) {
             productDao.delete(code);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }
+    }
+
+    public List<Product> getProductsSortedBy(String sortBy) throws SQLException {
+        try (ProductDao productDao = daoFactory.createProductDao()) {
+            List<Product> products = productDao.findAll();
+            switch (sortBy) {
+                case "code":
+                    products.sort(Product.ProductCodeComparator);
+                    break;
+                case "name":
+                    products.sort(Product.ProductNameComparator);
+                    break;
+                case "price":
+                    products.sort(Product.ProductPriceComparator);
+                    break;
+                default:
+                    break;
+            }
+            return products;
         }
     }
 }

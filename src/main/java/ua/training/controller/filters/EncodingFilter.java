@@ -8,6 +8,13 @@ public class EncodingFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
+
+    /**
+     * Implementation of encoding filter. Ensures
+     * UTF-8 encoding for multi-language support.
+     * @author Roman Kobzar
+     * @see javax.servlet.Filter
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         servletResponse.setContentType("text/html");

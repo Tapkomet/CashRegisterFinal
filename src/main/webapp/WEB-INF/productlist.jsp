@@ -12,6 +12,9 @@
         <h2>
             List Products <br/>
         </h2>
+        <c:if test="${not empty sql_error_message}">
+            <p class="error">${sql_error_message}</p>
+        </c:if>
         <table>
         <tr><th>Code</th><th>Name</th><th>Price</th><th>IsSoldByWeight</th>
         <th>Total number</th><th>Total weight</th><th>User</th><th></th></tr>
@@ -28,14 +31,36 @@
         </c:forEach>
         </table>
         <br>
+        <form action="${pageContext.request.contextPath}/api/manager/products" method="get">
+        Sort by: <br>
+        <input type="radio" name="toSort" value="code" checked>Code<br>
+        <input type="radio" name="toSort" value="name">Name<br>
+        <input type="radio" name="toSort" value="price">Price<br>
+        <input type="submit" value="Sort"/>
+        </form>
         <br>
         <form action="${pageContext.request.contextPath}/api/manager/addProduct" method="post">
              Code <input type="number" name="code"/><br>
+             <c:if test="${not empty code_error_message}">
+                <p class="error">${code_error_message}</p>
+             </c:if>
              Name <input type="text" name="name"/><br>
+             <c:if test="${not empty name_error_message}">
+                <p class="error">${name_error_message}</p>
+             </c:if>
              Sold by Weight <input type="checkbox" name="soldByWeight"/><br>
              Number in stock <input type="number" name="number"/><br>
+             <c:if test="${not empty number_error_message}">
+                <p class="error">${number_error_message}</p>
+             </c:if>
              Total weight in stock <input type="number" name="weight"/><br>
+             <c:if test="${not empty weight_error_message}">
+                <p class="error">${weight_error_message}</p>
+             </c:if>
              Price per unit or kilo <input type="number" name="price"/><br>
+             <c:if test="${not empty price_error_message}">
+                <p class="error">${price_error_message}</p>
+             </c:if>
              <input type="submit"/>
         </form>
 

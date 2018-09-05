@@ -2,6 +2,8 @@ package ua.training.model.entity;
 
 import lombok.Data;
 
+import java.util.Comparator;
+
 @Data
 public class Product {
     private int code;
@@ -13,6 +15,24 @@ public class Product {
     private long weight;
     private User manager;
 
+    public static Comparator<Product> ProductCodeComparator = (s1, s2) -> {
+        int code1 = s1.getCode();
+        int code2 = s2.getCode();
+        return code1-code2;
+    };
+
+    public static Comparator<Product> ProductNameComparator = (s1, s2) -> {
+        String name1 = s1.getName().toUpperCase();
+        String name2 = s2.getName().toUpperCase();
+        return name1.compareTo(name2);
+    };
+
+    public static Comparator<Product> ProductPriceComparator = (s1, s2) -> {
+        long price1 = s1.getPrice();
+        long price2 = s2.getPrice();
+        return Long.compare(price1, price2);
+    };
+    
     @Override
     public String toString() {
         return "User{" +

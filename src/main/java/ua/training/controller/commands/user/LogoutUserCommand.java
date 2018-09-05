@@ -14,6 +14,10 @@ public class LogoutUserCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(LogoutUserCommand.class);
 
+    /**
+     * @param request
+     * logs out user
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CommandUtility.setUser(request, null);

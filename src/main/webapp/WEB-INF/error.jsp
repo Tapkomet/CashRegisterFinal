@@ -13,8 +13,15 @@
     <body>
         <h2>
            Error Page<br/>
-            <i>Error <%= exception %></i>
         </h2>
+
+        <c:if test="${not empty code}">
+            <p class="error">Error code: ${code}</p>
+        </c:if>
+
+        <c:if test="${not empty message}">
+            <p class="message">Error: ${message}</p>
+        </c:if>
 
 
        <br>

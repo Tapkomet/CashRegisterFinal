@@ -12,18 +12,33 @@
         <h2>
             The product <br/>
         </h2>
+        <c:if test="${not empty sql_error_message}">
+            <p class="error">${sql_error_message}</p>
+        </c:if>
 
         <br>
         <br>
         <form action="${pageContext.request.contextPath}/api/manager/editProduct" method="post">
              Code <input type="number" name="code" value="${product.code}" readonly/><br>
+             <c:if test="${not empty code_error_message}">
+                <p class="error">${code_error_message}</p>
+             </c:if>
              Name <input type="text" name="name" value="${product.name}" readonly/><br>
              Sold by Weight: ${product.soldByWeight}<br>
              <input type="hidden" name="soldByWeight" value="${product.soldByWeight}"/>
              Number in stock <input type="number" name="number" value="${product.number}"/><br>
+             <c:if test="${not empty number_error_message}">
+                <p class="error">${number_error_message}</p>
+             </c:if>
              Total weight in stock <input type="number" name="weight" value="${product.weight}"/><br>
+             <c:if test="${not empty weight_error_message}">
+                <p class="error">${weight_error_message}</p>
+             </c:if>
              Price per unit or kilo <input type="number" name="price" value="${product.price}"/><br>
-             <input type="submit"/>
+             <c:if test="${not empty price_error_message}">
+                <p class="error">${price_error_message}</p>
+             </c:if>
+             <input type="submit"
         </form>
 
         <br/>

@@ -37,5 +37,9 @@ String getFormattedDate(){
         <a href="${pageContext.request.contextPath}/api/cashier">Cashier View</a>
         <br>
 
+
+        <c:if test="${not empty index_message}">
+            <p>${index_message}</p>
+        </c:if>
     </body>
 </html>
