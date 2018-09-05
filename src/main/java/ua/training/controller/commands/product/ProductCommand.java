@@ -3,6 +3,7 @@ package ua.training.controller.commands.product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.controller.commands.Command;
+import ua.training.controller.util.Path;
 import ua.training.model.entity.Product;
 import ua.training.model.service.ProductService;
 
@@ -32,6 +33,6 @@ public class ProductCommand implements Command {
             logger.debug("Database error when requesting product {}"+code);
             request.setAttribute("sql_error_message", "Database problem: " + e.getMessage());
         }
-        forward(request, response, "/WEB-INF/product.jsp");
+        forward(request, response, Path.PRODUCT);
     }
 }

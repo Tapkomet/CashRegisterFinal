@@ -2,6 +2,7 @@ package ua.training.controller.commands.product;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.training.controller.util.Path;
 import ua.training.model.entity.Product;
 import ua.training.model.service.ProductService;
 
@@ -42,7 +43,7 @@ public class ProductListCommand implements ua.training.controller.commands.Comma
                 logger.debug("Database error when requesting products");
                 request.setAttribute("sql_error_message", "Database problem: " + e.getMessage());
             }
-            forward(request, response, "/WEB-INF/productlist.jsp");
+            forward(request, response, Path.PRODUCT_LIST);
         }
     }
 
@@ -54,6 +55,6 @@ public class ProductListCommand implements ua.training.controller.commands.Comma
             logger.debug("Database error when requesting products");
             request.setAttribute("sql_error_message", "Database problem: " + e.getMessage());
         }
-        forward(request, response, "/WEB-INF/productlist.jsp");
+        forward(request, response, Path.PRODUCT_LIST);
     }
 }

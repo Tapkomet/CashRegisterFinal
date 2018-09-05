@@ -3,6 +3,7 @@ package ua.training.controller.commands.user;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.controller.commands.Command;
+import ua.training.controller.util.Path;
 import ua.training.controller.util.Regex;
 import ua.training.model.service.UserService;
 
@@ -29,34 +30,34 @@ public class RegisterUserCommand implements Command {
         String pass = request.getParameter("pass");
         if (surname == null || surname.equals("")) {
             request.setAttribute("surname_error_message", "Put in the surname");
-            forward(request, response, "/registration.jsp");
+            forward(request, response, Path.REGISTRATION);
             return;
         }
         if (email == null || email.equals("")) {
             request.setAttribute("email_error_message", "Put in the email");
-            forward(request, response, "/registration.jsp");
+            forward(request, response, Path.REGISTRATION);
             return;
         }
         if(pass == null || pass.equals("")){
             request.setAttribute("password_error_message", "Put in the password");
-            forward(request, response, "/registration.jsp");
+            forward(request, response, Path.REGISTRATION);
             return;
         }
 
 
         if (!Regex.isEmailCorrect(email)) {
             request.setAttribute("email_error_message", "Invalid email");
-            forward(request, response, "/registration.jsp");
+            forward(request, response, Path.REGISTRATION);
             return;
         }
         if (!Regex.isSurnameCorrect(surname)) {
             request.setAttribute("surname_error_message", "Invalid name");
-            forward(request, response, "/registration.jsp");
+            forward(request, response, Path.REGISTRATION);
             return;
         }
         if (!Regex.isPasswordCorrect(pass)) {
             request.setAttribute("password_error_message", "Invalid password");
-            forward(request, response, "/registration.jsp");
+            forward(request, response, Path.REGISTRATION);
             return;
         }
 
@@ -68,6 +69,6 @@ public class RegisterUserCommand implements Command {
         }
         logger.info("Registration success for user {}", email);
         request.setAttribute("index_message", "Registration successful");
-        forward(request, response, "/index.jsp");
+        forward(request, response, Path.INDEX);
     }
 }

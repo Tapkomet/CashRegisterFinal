@@ -1,5 +1,6 @@
 package ua.training.controller.commands.product;
 
+import ua.training.controller.util.Path;
 import ua.training.model.entity.Product;
 import ua.training.model.entity.User;
 import ua.training.model.service.ProductService;
@@ -30,6 +31,6 @@ public class DeleteProductCommand implements ua.training.controller.commands.Com
             listCommand.getAllProducts(request, response);
             return;
         }
-        redirect(request, response, "/api/manager/products");
+        redirect(request, response, Path.MANAGER_PRODUCTS);
     }
 }

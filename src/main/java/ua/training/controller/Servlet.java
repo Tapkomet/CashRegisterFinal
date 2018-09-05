@@ -5,6 +5,7 @@ import ua.training.controller.commands.product.*;
 import ua.training.controller.commands.user.LoginUserCommand;
 import ua.training.controller.commands.user.LogoutUserCommand;
 import ua.training.controller.commands.user.RegisterUserCommand;
+import ua.training.controller.util.Path;
 import ua.training.model.service.CheckService;
 import ua.training.model.service.ProductService;
 import ua.training.model.service.UserService;
@@ -60,7 +61,7 @@ public class Servlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String path = request.getRequestURI();
         path = path.replaceAll(".*/api/" , "");
-        Command command = commands.containsKey(path) ? commands.get(path) : commands.get("/index.jsp");
+        Command command = commands.containsKey(path) ? commands.get(path) : commands.get(Path.INDEX);
         command.execute(request, response);
         //request.getRequestDispatcher(page).forward(request,response);
         //  response.getWriter().print("Hello from servlet");

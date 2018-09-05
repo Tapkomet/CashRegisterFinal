@@ -1,5 +1,6 @@
 package ua.training.controller.filters;
 
+import ua.training.controller.util.Path;
 import ua.training.model.entity.User;
 
 import javax.servlet.*;
@@ -19,7 +20,7 @@ public class AccessFilter implements Filter {
         User user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        String loginURI = request.getContextPath() + "/login.jsp";
+        String loginURI = request.getContextPath() + Path.LOGIN;
         String path = request.getRequestURI();
         String roleRequired = "";
         if (path.contains("manager")) roleRequired = "manager";

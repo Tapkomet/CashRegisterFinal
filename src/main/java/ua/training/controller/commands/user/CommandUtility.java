@@ -25,16 +25,6 @@ class CommandUtility {
     }
 
     static boolean checkUserIsLogged(HttpServletRequest request, String email){
-        /*HashSet<String> loggedUsers = (HashSet<String>) request.getSession().getServletContext()
-                .getAttribute("loggedUsers");
-
-        if(loggedUsers.stream().anyMatch(email::equals)){
-            return true;
-        }
-        loggedUsers.add(email);
-        request.getSession().getServletContext()
-                .setAttribute("loggedUsers", loggedUsers);
-        return false;*/
         if((User) ((HttpServletRequest) request).getSession().getAttribute("user")!=null){
             return true;
         }

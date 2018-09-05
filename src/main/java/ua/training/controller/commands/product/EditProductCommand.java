@@ -1,6 +1,7 @@
 package ua.training.controller.commands.product;
 
 import ua.training.controller.commands.Command;
+import ua.training.controller.util.Path;
 import ua.training.controller.util.Regex;
 import ua.training.model.entity.Product;
 import ua.training.model.entity.User;
@@ -72,7 +73,7 @@ public class EditProductCommand implements Command {
             listCommand.getAllProducts(request, response);
             return;
         }
-        redirect(request, response, "/api/manager/products");
+        redirect(request, response, Path.MANAGER_PRODUCTS);
     }
 
     private void showError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
