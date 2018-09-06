@@ -10,6 +10,7 @@ import ua.training.model.service.exception.WrongEmailException;
 import ua.training.model.service.exception.WrongPasswordException;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 public class UserService {
@@ -17,6 +18,12 @@ public class UserService {
     private static final Logger logger = LogManager.getLogger(UserService.class);
 
     DaoFactory daoFactory = DaoFactory.getInstance();
+
+    public List<User> getAllUsers() throws SQLException {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findAll();
+        }
+    }
 
     public Optional<User> login(String email, String pass) throws LoginException {
         Optional<User> result;
@@ -37,5 +44,11 @@ public class UserService {
     public void register(String surname, String email, String pass) throws SQLException {
         UserDao userDao = daoFactory.createUserDao();
             userDao.register(surname, email, pass);
+    }
+
+    public void update(User user) throws SQLException {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            userDao.update(user);
+        }
     }
 }

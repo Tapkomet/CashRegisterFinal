@@ -59,8 +59,18 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void update(User entity) {
+    public void update(User user) throws SQLException {
+        int id = user.getId();
+        String role = user.getRole().toString();
+        PreparedStatement stmt = connection.prepareStatement(
+                "update user set role = ?" +
+                        " where user_id = ?");
+        stmt.setInt(2, id);
+        stmt.setString(1, role);
+        stmt.executeUpdate();
 
+        stmt.close();
+        connection.close();
     }
 
     @Override

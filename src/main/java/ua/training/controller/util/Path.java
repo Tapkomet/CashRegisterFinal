@@ -3,6 +3,8 @@ package ua.training.controller.util;
 public final class Path {
     public static final String MANAGER = "/api/manager";
     public static final String ADMIN = "/api/admin";
+    public static final String ADMIN_USERS = "/api/admin/users";
+    public static final String ADMIN_EDIT_USER = "/api/admin/users/edit";
     public static final String CASHIER = "/api/cashier";
     public static final String CASHIER_CHECKS = "/api/cashier/checks";
     public static final String MANAGER_PRODUCTS = "/api/manager/products";
@@ -21,6 +23,7 @@ public final class Path {
     public static final String CHECK_LIST = "/WEB-INF/checklist.jsp";
     public static final String ERROR = "/WEB-INF/error.jsp";
     public static final String PRODUCT_LIST = "/WEB-INF/productlist.jsp";
+    public static final String USER_LIST = "/WEB-INF/userlist.jsp";
     public static final String PRODUCT = "/WEB-INF/product.jsp";
     public static final String INDEX = "/index.jsp";
     public static final String LOGIN = "/login.jsp";

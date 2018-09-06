@@ -23,7 +23,7 @@ String getFormattedDate(){
 
         <br/>
         <a href="${pageContext.request.contextPath}/api/logout">Logout</a> <br>
-        <a href="${pageContext.request.contextPath}/api/cashier/checks">Checks</a>
+        <a href="${pageContext.request.contextPath}/api/cashier/checks">Work</a>
 
     </body>
 </html>

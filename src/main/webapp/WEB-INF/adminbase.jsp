@@ -29,6 +29,10 @@ String getFormattedDate(){
         <a href="${pageContext.request.contextPath}/api/cashier">View as Cashier</a>
         <br>
         <a href="${pageContext.request.contextPath}/api/manager">View as Manager</a>
+        <br>
+        <a href="${pageContext.request.contextPath}/api/admin/checks">View all checks</a>
+        <br>
+        <a href="${pageContext.request.contextPath}/api/admin/users">View users</a>
 
     </body>
 </html>

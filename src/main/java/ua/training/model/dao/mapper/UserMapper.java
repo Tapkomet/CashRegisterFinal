@@ -12,7 +12,8 @@ public class UserMapper implements ObjectMapper<User> {
     public User extractFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("user_id"));
-        user.setSurname(rs.getString("email"));
+        user.setSurname(rs.getString("surname"));
+        user.setEmail(rs.getString("email"));
         user.setRoleFromString(rs.getString("role"));
         user.setPassword(rs.getString("password"));
         return user;

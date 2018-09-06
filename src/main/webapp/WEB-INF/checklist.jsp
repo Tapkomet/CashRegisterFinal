@@ -12,10 +12,14 @@
         <h2>
             List Checks <br/>
         </h2>
+        <c:if test="${not empty sql_error_message}">
+            <p class="error">${sql_error_message}</p>
+        </c:if>
         <table>
-        <tr><th>Name</th><th>Group</th></tr>
+        <tr><th>Id</th><th>Total price</th><th>Time</th></tr>
         <c:forEach var="i" items="${checks}">
-            <tr><td><c:out value="${i.id}"/></td><td>${i.totalPrice}</td>
+            <tr><td><a href="check?id=<c:out value='${i.id}' />"> <c:out value="${i.id}"/></a></td>
+            <td>${i.totalPrice}</td><td>${i.createTime}</td>
         </c:forEach>
         </table>
         <br>
