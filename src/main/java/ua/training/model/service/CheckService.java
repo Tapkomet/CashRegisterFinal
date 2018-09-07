@@ -22,11 +22,9 @@ public class CheckService {
         }
     }
 
-    public void create(Check check){
+    public void create(Check check) throws SQLException {
         try (CheckDao checkDao = daoFactory.createCheckDao()) {
             checkDao.create(check);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }

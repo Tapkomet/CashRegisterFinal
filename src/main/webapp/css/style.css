@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+body {
+    padding: 20px 80px;
+    background: #e0eaf9;
+}
+
+.centre{
+    text-align: center;
+}
+
+.error{
+    color: #ff0000;
+}
+

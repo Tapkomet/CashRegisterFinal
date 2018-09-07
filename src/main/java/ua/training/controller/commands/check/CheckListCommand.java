@@ -1,5 +1,6 @@
-package ua.training.controller.commands;
+package ua.training.controller.commands.check;
 
+import ua.training.controller.commands.Command;
 import ua.training.controller.util.Path;
 import ua.training.model.entity.Check;
 import ua.training.model.service.CheckService;

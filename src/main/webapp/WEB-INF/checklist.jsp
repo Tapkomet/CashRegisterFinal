@@ -24,7 +24,7 @@
         </table>
         <br>
         <br>
-
+        <a href="${pageContext.request.contextPath}/api/cashier/checks/addPage">Create new check</a>
         <br/>
         <a href="${pageContext.request.contextPath}/index.jsp">index</a>
     </body>

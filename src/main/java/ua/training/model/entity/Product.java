@@ -45,6 +45,19 @@ public class Product {
                 '}';
     }
 
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int result = 1;
+        result = result * PRIME + this.code;
+        result = result * PRIME + (this.manager == null ? 0 : this.manager.hashCode());
+        result = result * PRIME + (soldByWeight ? 1 : 0);
+        result = result * PRIME + (int) (this.price ^ (this.price >>> 32));
+        result = result * PRIME + this.number;
+        result = result * PRIME + (int) (this.weight ^ (this.weight >>> 32));
+        return result;
+    }
+
 
     public static class Builder {
 

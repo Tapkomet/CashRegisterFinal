@@ -154,14 +154,12 @@ public class JDBCProductDao implements ProductDao {
         PreparedStatement stmt = connection.prepareStatement(" select * from product ORDER BY ?");
         stmt.setString(1, sortBy);
         ResultSet rs = stmt.executeQuery();
-        System.out.println(sortBy);
 
         ProductMapper productMapper = new ProductMapper();
 
         while (rs.next()) {
             Product product = productMapper
                     .extractFromResultSet(rs);
-            System.out.println(product);
             productMapper
                     .makeUnique(products, product);
         }

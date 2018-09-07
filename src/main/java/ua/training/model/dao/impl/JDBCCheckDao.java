@@ -26,15 +26,18 @@ public class JDBCCheckDao implements CheckDao {
         long totalPrice = check.getTotalPrice();
         int cashierId = check.getCashier().getId();
         int shiftId = check.getShift().getId();
+        Timestamp createTime = check.getCreateTime();
         connection.setAutoCommit(false);
         PreparedStatement stmt = connection.prepareStatement(
-                "insert into cheque (check_id, total_price, cashier_id, shift_id)" +
-                " values (?, ?, ?, ?)");
+                "insert into cheque (check_id, total_price, cashier_id, shift_id, create_time)" +
+                " values (?, ?, ?, ?, ?)");
         stmt.setInt(1, id);
         stmt.setLong(2, totalPrice);
         stmt.setInt(3, cashierId);
         stmt.setInt(4, shiftId);
+        stmt.setTimestamp(5, createTime);
         stmt.addBatch();
+        stmt.executeBatch();
         stmt = connection.prepareStatement(
                 "insert into product_in_check (code, name, is_sold_by_weight, number_sold," +
                         " weight_sold, price, check_id)" +
@@ -46,7 +49,7 @@ public class JDBCCheckDao implements CheckDao {
             stmt.setInt(4, product.getNumber());
             stmt.setLong(5, product.getWeight());
             stmt.setLong(6, product.getPrice());
-            stmt.setInt(7, product.getCheck().getId());
+            stmt.setLong(7, product.getCheck().getId());
             stmt.addBatch();
         }
         stmt.executeBatch();

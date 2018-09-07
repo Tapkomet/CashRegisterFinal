@@ -14,6 +14,7 @@ public class CheckMapper implements ObjectMapper<Check> {
         Check check = new Check();
         check.setId(rs.getInt("check_id"));
         check.setTotalPrice(rs.getLong("total_price"));
+        check.setCreateTime(rs.getTimestamp("create_time"));
         return check;
     }
 

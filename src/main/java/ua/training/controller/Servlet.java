@@ -1,6 +1,9 @@
 package ua.training.controller;
 
 import ua.training.controller.commands.*;
+import ua.training.controller.commands.check.AddCheckCommand;
+import ua.training.controller.commands.check.CheckAddPageCommand;
+import ua.training.controller.commands.check.CheckListCommand;
 import ua.training.controller.commands.product.*;
 import ua.training.controller.commands.user.*;
 import ua.training.controller.util.Path;
@@ -14,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -47,6 +49,10 @@ public class Servlet extends HttpServlet {
         commands.put("exception" , new ExceptionCommand());
         commands.put("cashier/checks",
                 new CheckListCommand(new CheckService()));
+        commands.put("cashier/checks/addPage",
+                new CheckAddPageCommand(new ProductService()));
+        commands.put("cashier/checks/add",
+                new AddCheckCommand(new CheckService()));
         commands.put("manager" , new ManagerCommand());
         commands.put("admin/users", new UserListCommand(new UserService()));
         commands.put("admin/users/edit", new EditUserCommand(new UserService()));

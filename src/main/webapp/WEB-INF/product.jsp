@@ -38,7 +38,7 @@
              <c:if test="${not empty price_error_message}">
                 <p class="error">${price_error_message}</p>
              </c:if>
-             <input type="submit"
+             <input type="submit">
         </form>
 
         <br/>
