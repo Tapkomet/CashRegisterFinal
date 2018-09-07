@@ -45,7 +45,7 @@
   </error-page>
   <error-page>
     <error-code>404</error-code>
-    <location>/WEB-INF/pages/custom-not-found-page.html</location>
+    <location>/api/exception</location>
   </error-page>
 
 </web-app>

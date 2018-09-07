@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 body {
     padding: 20px 80px;
-    background: #e0eaf9;
+    background: #fffbe5;
 }
 
 .centre{
@@ -11,4 +11,14 @@ body {
 .error{
     color: #ff0000;
 }
+
+.options {
+    list-style: none;
+    padding: 25px 10px;
+    border-top: 4px double #AAA;
+    border-bottom: 4px double #AAA;
+    position: relative;
+    text-align: center;
+}
+
 

@@ -8,14 +8,16 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Doctor App</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
     <body>
+        <div class="container col-lg-12 centre">
         <h2>
-            Login page! <br/>
+            Please log in! <br/>
 
         </h2>
-
         <c:if test="${not empty sql_error_message}">
             <p class="error">${sql_error_message}</p>
         </c:if>
@@ -37,6 +39,6 @@
             </c:if>
             <input type="submit"/>
         </form>
-
+       </div>
     </body>
 </html>

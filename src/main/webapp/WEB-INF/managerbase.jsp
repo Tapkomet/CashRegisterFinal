@@ -7,16 +7,20 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Manager Page</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
     <body>
+        <div class="container col-lg-12 centre">
         <h2>
             Hello Manager! <br/>
         </h2>
 
         <br/>
-        <a href="${pageContext.request.contextPath}/api/logout">Logout</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/api/manager/products">ProductList</a>
-
+        <ul class="options">
+        <li><a href="${pageContext.request.contextPath}/api/logout">Logout</a></li>
+        <li><a href="${pageContext.request.contextPath}/api/manager/products">ProductList</a></li>
+        </ul>
+        </div>
     </body>
 </html>
