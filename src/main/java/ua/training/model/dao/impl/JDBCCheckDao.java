@@ -2,6 +2,7 @@ package ua.training.model.dao.impl;
 
 import ua.training.model.dao.CheckDao;
 import ua.training.model.dao.mapper.CheckMapper;
+import ua.training.model.dao.mapper.ProductMapper;
 import ua.training.model.entity.Check;
 import ua.training.model.entity.Product;
 import ua.training.model.service.ProductService;
@@ -62,13 +63,25 @@ public class JDBCCheckDao implements CheckDao {
     @Override
     public Check findById(int id) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "select * from check where code = (?)");
+                "select * from cheque" +
+                        " left join product_in_check on cheque.check_id = product_in_check.check_id" +
+                        " where cheque.check_id = (?) ");
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         CheckMapper checkMapper = new CheckMapper();
 
         rs.next();
         Check check = checkMapper.extractFromResultSet(rs);
+
+        List<Product> products = new ArrayList<>();
+        ProductMapper productMapper = new ProductMapper();
+        do {
+            Product product = productMapper
+                    .extractFromResultSetForCheck(rs);
+            products.add(product);
+        }
+        while(rs.next());
+        check.setProducts(products);
 
         stmt.close();
         connection.close();
@@ -80,7 +93,7 @@ public class JDBCCheckDao implements CheckDao {
         Map<Integer, Check> checks = new HashMap<>();
 
         final String query = "" +
-                " select * from cheque";
+                " select check_id, create_time, total_price from cheque";
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery(query);
 
@@ -105,7 +118,7 @@ public class JDBCCheckDao implements CheckDao {
     @Override
     public void delete(int id) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(
-                "delete from check where code = (?)");
+                "delete from cheque where code = (?)");
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
 

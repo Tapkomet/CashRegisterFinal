@@ -27,4 +27,10 @@ public class CheckService {
             checkDao.create(check);
         }
     }
+
+    public Check getCheckById(int id) throws SQLException {
+        try (CheckDao dao = daoFactory.createCheckDao()) {
+            return dao.findById(id);
+        }
+    }
 }

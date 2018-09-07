@@ -26,6 +26,7 @@ public interface Path {
     String CASHIER_PRODUCT_LIST = "/WEB-INF/cashierproductlist.jsp";
     String USER_LIST = "/WEB-INF/userlist.jsp";
     String PRODUCT = "/WEB-INF/product.jsp";
+    String CHECK = "/WEB-INF/check.jsp";
     String INDEX = "/index.jsp";
     String LOGIN = "/login.jsp";
     String REGISTRATION = "/registration.jsp";

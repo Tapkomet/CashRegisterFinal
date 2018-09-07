@@ -1,5 +1,6 @@
 package ua.training.model.dao.mapper;
 
+import ua.training.model.entity.Check;
 import ua.training.model.entity.Product;
 import ua.training.model.entity.User;
 
@@ -22,6 +23,20 @@ public class ProductMapper implements ObjectMapper<Product> {
         User manager = new User();
         manager.setId(rs.getInt("product_manager_id"));
         product.setManager(manager);
+        return product;
+    }
+
+    public Product extractFromResultSetForCheck(ResultSet rs) throws SQLException {
+        Product product = new Product();
+        product.setCode(rs.getInt("code"));
+        product.setName(rs.getString("name"));
+        product.setPrice(rs.getLong("price"));
+        product.setSoldByWeight(rs.getBoolean("is_sold_by_weight"));
+        product.setNumber(rs.getInt("number_sold"));
+        product.setWeight(rs.getLong("weight_sold"));
+        Check check = new Check();
+        check.setId(rs.getInt("check_id"));
+        product.setCheck(check);
         return product;
     }
 

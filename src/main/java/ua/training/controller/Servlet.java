@@ -3,6 +3,7 @@ package ua.training.controller;
 import ua.training.controller.commands.*;
 import ua.training.controller.commands.check.AddCheckCommand;
 import ua.training.controller.commands.check.CheckAddPageCommand;
+import ua.training.controller.commands.check.CheckCommand;
 import ua.training.controller.commands.check.CheckListCommand;
 import ua.training.controller.commands.product.*;
 import ua.training.controller.commands.user.*;
@@ -47,6 +48,8 @@ public class Servlet extends HttpServlet {
         commands.put("user-register",
                 new RegisterUserCommand(new UserService()));
         commands.put("exception" , new ExceptionCommand());
+        commands.put("cashier/check",
+                new CheckCommand(new CheckService()));
         commands.put("cashier/checks",
                 new CheckListCommand(new CheckService()));
         commands.put("cashier/checks/addPage",
@@ -69,8 +72,6 @@ public class Servlet extends HttpServlet {
         path = path.replaceAll(".*/api/" , "");
         Command command = commands.containsKey(path) ? commands.get(path) : commands.get(Path.INDEX);
         command.execute(request, response);
-        //request.getRequestDispatcher(page).forward(request,response);
-        //  response.getWriter().print("Hello from servlet");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

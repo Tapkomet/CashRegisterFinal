@@ -4,6 +4,7 @@ import ua.training.model.entity.Check;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class CheckMapper implements ObjectMapper<Check> {
@@ -23,5 +24,16 @@ public class CheckMapper implements ObjectMapper<Check> {
                               Check check) {
         cache.putIfAbsent(check.getId(), check);
         return cache.get(check.getId());
+    }
+
+    public Check mergeChecks(Check check, Check tempCheck) {
+        if (check == null) {
+            return tempCheck;
+        }
+        final ArrayList<ua.training.model.entity.Product> temp = new ArrayList<>(check.getProducts());
+        temp.addAll(check.getProducts());
+        temp.addAll(tempCheck.getProducts());
+        check.setProducts(temp);
+        return check;
     }
 }
