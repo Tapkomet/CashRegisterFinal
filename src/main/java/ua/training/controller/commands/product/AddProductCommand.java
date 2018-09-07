@@ -89,6 +89,6 @@ public class AddProductCommand implements ua.training.controller.commands.Comman
 
     private void showError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductListCommand listCommand = new ProductListCommand(productService);
-        listCommand.getAllProducts(request, response);
+        listCommand.execute(request, response);
     }
 }

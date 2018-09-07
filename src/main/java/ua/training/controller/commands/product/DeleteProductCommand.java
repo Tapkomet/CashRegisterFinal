@@ -28,7 +28,7 @@ public class DeleteProductCommand implements ua.training.controller.commands.Com
         } catch (SQLException e) {
             request.setAttribute("sql_error_message", "Database problem: " + e.getMessage());
             ProductListCommand listCommand = new ProductListCommand(productService);
-            listCommand.getAllProducts(request, response);
+            listCommand.execute(request, response);
             return;
         }
         redirect(request, response, Path.MANAGER_PRODUCTS);

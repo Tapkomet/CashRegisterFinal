@@ -30,6 +30,13 @@ public class EditUserCommand implements Command {
         User user = new User();
         user.setId(id);
         user.setRoleFromString(role);
+        User loggedUser = (User) ((HttpServletRequest) request).getSession().getAttribute("user");
+        if(id==loggedUser.getId()){
+            request.setAttribute("self_error_message", "You cannot change your own role");
+            UserListCommand listCommand = new UserListCommand(userService);
+            listCommand.execute(request, response);
+            return;
+        }
         try {
             userService.update(user);
         } catch (SQLException e) {

@@ -17,6 +17,11 @@ public class ProductService {
                 return productDao.findAll();
         }
     }
+    public int getProductCount() throws SQLException {
+        try (ProductDao productDao = daoFactory.createProductDao()) {
+            return productDao.getCount();
+        }
+    }
 
     public Product getProductById(int id) throws SQLException {
         try (ProductDao dao = daoFactory.createProductDao()) {
@@ -53,19 +58,13 @@ public class ProductService {
     public List<Product> getProductsSortedBy(String sortBy) throws SQLException {
         try (ProductDao productDao = daoFactory.createProductDao()) {
             List<Product> products = productDao.findAll();
-            switch (sortBy) {
-                case "code":
-                    products.sort(Product.ProductCodeComparator);
-                    break;
-                case "name":
-                    products.sort(Product.ProductNameComparator);
-                    break;
-                case "price":
-                    products.sort(Product.ProductPriceComparator);
-                    break;
-                default:
-                    break;
-            }
+            return products;
+        }
+    }
+
+    public List<Product> getProductsSorted(String sortBy, int rows_on_page, Integer offset) throws SQLException {
+        try (ProductDao productDao = daoFactory.createProductDao()) {
+            List<Product> products = productDao.findNumberSorted(sortBy, rows_on_page, offset);
             return products;
         }
     }

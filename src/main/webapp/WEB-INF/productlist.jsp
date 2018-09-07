@@ -32,12 +32,31 @@
             </td>
         </c:forEach>
         </table>
+
+        <form action="${pageContext.request.contextPath}/api/manager/products" method="post">
+        	<c:if test="${page > 1}">
+        	    <button type="submit" class="btn btn-default" name="nextPage" value='previous'>
+                    Previous
+        	    </button>
+        	</c:if>
+        	<c:if test="${page < lastPage}">
+                <button type="submit" class="btn btn-default" name="nextPage" value='next'>
+        	            Next
+        	    </button>
+        	</c:if>
+        	<input type="hidden" name = "page" value="${page}">
+        	<input type="hidden" name = "tosort" value="${tosort}">
+        </form>
+
         <br>
         <form action="${pageContext.request.contextPath}/api/manager/products" method="get">
         Sort by: <br>
-        <input type="radio" name="toSort" value="code" checked>Code<br>
-        <input type="radio" name="toSort" value="name">Name<br>
-        <input type="radio" name="toSort" value="price">Price<br>
+        <input type="radio" name="tosort" value="code"
+         <c:if test="${tosort eq 'code'}">checked</c:if>>Code<br>
+        <input type="radio" name="tosort" value="name"
+         <c:if test="${tosort eq 'name'}">checked</c:if>>Name<br>
+        <input type="radio" name="tosort" value="price"
+         <c:if test="${tosort eq 'price'}">checked</c:if>>Price<br>
         <input type="submit" value="Sort"/>
         </form>
         <br>

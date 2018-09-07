@@ -36,7 +36,7 @@ public class AccessFilter implements Filter {
                 }
                 break;
             case "admin":
-                if (user!=null&&(user.getRole() == User.ROLE.PRODUCT_MANAGER || user.getRole() == User.ROLE.SENIOR_CASHIER)) {
+                if (user!=null&&user.getRole() == User.ROLE.SENIOR_CASHIER) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
                     response.sendRedirect(loginURI);

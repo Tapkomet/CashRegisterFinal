@@ -14,6 +14,9 @@
         <h2>
             List Users <br/>
         </h2>
+        <c:if test="${not empty self_error_message}">
+            <p class="error">${self_error_message}</p>
+        </c:if>
         <c:if test="${not empty sql_error_message}">
             <p class="error">${sql_error_message}</p>
         </c:if>

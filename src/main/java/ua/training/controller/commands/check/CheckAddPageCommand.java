@@ -31,7 +31,7 @@ public class CheckAddPageCommand implements ua.training.controller.commands.Comm
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String sortBy = request.getParameter("toSort");
+        String sortBy = request.getParameter("tosort");
         if(sortBy==null) {
             getAllProducts(request, response);
         }

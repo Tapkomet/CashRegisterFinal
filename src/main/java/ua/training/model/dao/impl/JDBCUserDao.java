@@ -52,7 +52,7 @@ public class JDBCUserDao implements UserDao {
         while (rs.next()) {
             User user = userMapper
                     .extractFromResultSet(rs);
-            user = userMapper
+            userMapper
                     .makeUnique(users, user);
         }
         return new ArrayList<>(users.values());
@@ -92,6 +92,11 @@ public class JDBCUserDao implements UserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public int getCount() throws SQLException {
+        return 0;
     }
 
     @Override

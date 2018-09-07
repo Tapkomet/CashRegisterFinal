@@ -76,12 +76,11 @@ public class JDBCProductDao implements ProductDao {
         while (rs.next()) {
             Product product = productMapper
                     .extractFromResultSet(rs);
-            product = productMapper
+            productMapper
                     .makeUnique(products, product);
         }
         return new ArrayList<>(products.values());
     }
-
 
 
     @Override
@@ -122,12 +121,23 @@ public class JDBCProductDao implements ProductDao {
     }
 
     @Override
-    public void close()  {
+    public void close() {
         try {
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public int getCount() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement
+                ("select count(*) as count from product");
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("count");
+        }
+        return 0;
     }
 
     @Override
@@ -164,5 +174,40 @@ public class JDBCProductDao implements ProductDao {
                     .makeUnique(products, product);
         }
         return new ArrayList<>(products.values());
+    }
+
+    @Override
+    public List<Product> findNumberSorted(String sortBy, int integer, int offset) throws SQLException {
+        PreparedStatement stmt = null;
+        switch (sortBy) {
+            case "code":
+                stmt = connection.prepareStatement
+                        (" select * from product order by code+0 limit ? offset ?");
+                break;
+            case "name":
+                stmt = connection.prepareStatement
+                        (" select * from product order by name limit ? offset ?");
+                break;
+            case "price":
+                stmt = connection.prepareStatement
+                        (" select * from product order by price+0 limit ? offset ?");
+                break;
+            default:
+                break;
+        }
+        stmt.setInt(1, integer);
+        stmt.setInt(2, offset);
+
+        ResultSet rs = stmt.executeQuery();
+
+        List<Product> products = new ArrayList<>();
+        ProductMapper productMapper = new ProductMapper();
+
+        while (rs.next()) {
+            Product product = productMapper
+                    .extractFromResultSet(rs);
+            products.add(product);
+        }
+        return products;
     }
 }

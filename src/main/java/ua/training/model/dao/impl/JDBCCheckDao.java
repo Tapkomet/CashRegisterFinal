@@ -102,7 +102,7 @@ public class JDBCCheckDao implements CheckDao {
         while (rs.next()) {
             Check check = checkMapper
                     .extractFromResultSet(rs);
-            check = checkMapper
+            checkMapper
                     .makeUnique(checks, check);
         }
         return new ArrayList<>(checks.values());
@@ -133,5 +133,10 @@ public class JDBCCheckDao implements CheckDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public int getCount() throws SQLException {
+        return 0;
     }
 }

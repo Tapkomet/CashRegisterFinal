@@ -78,6 +78,6 @@ public class EditProductCommand implements Command {
 
     private void showError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductListCommand listCommand = new ProductListCommand(productService);
-        listCommand.getAllProducts(request, response);
+        listCommand.execute(request, response);
     }
 }
